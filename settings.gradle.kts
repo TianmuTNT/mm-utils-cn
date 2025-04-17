@@ -1,4 +1,4 @@
-rootProject.name = "MMUtils"
+rootProject.name = "MMUtilsCN"
 
 pluginManagement {
     repositories {
