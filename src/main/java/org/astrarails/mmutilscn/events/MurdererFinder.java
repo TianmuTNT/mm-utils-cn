@@ -1,7 +1,7 @@
-package me.yanjobs.mmutils.events;
+package org.astrarails.mmutilscn.events;
 
-import me.yanjobs.mmutils.MMUtils;
-import me.yanjobs.mmutils.utils.chat.Message;
+import org.astrarails.mmutilscn.MMUtilsCN;
+import org.astrarails.mmutilscn.utils.chat.Message;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,7 +17,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
-import me.yanjobs.mmutils.utils.mm.KnifeSkins;
+import org.astrarails.mmutilscn.utils.mm.KnifeSkins;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,8 +36,8 @@ public class MurdererFinder {
 
     @SubscribeEvent
     public void renderMurdererHitbox(RenderWorldEvent event) throws IOException {
-        if (!MMUtils.isInMMClassic) return;
-        if (!Boolean.parseBoolean(MMUtils.getConfig().getProperty("enabled"))) return;;
+        if (!MMUtilsCN.isInMMClassic) return;
+        if (!Boolean.parseBoolean(MMUtilsCN.getConfig().getProperty("enabled"))) return;;
         final List<String> playerList = getOnlinePlayersByName();
         for (String s : playerList) {
             final EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName((String) s);
@@ -115,7 +115,7 @@ public class MurdererFinder {
         if (world != null && world != this.lastWorld) {
             MurdererFinder.murderers.clear();
             MurdererFinder.detectives.clear();
-            MMUtils.isInMMClassic = false;
+            MMUtilsCN.isInMMClassic = false;
             murderFound = false;
         }
         this.lastWorld = world;

@@ -3,8 +3,8 @@ plugins {
     id("com.github.weave-mc.weave-gradle") version "649dba7468"
 }
 
-group = "me.yanjobs.mm-utils"
-version = "1.0"
+group = "org.astrarails.mm-utils-cn"
+version = "1.1"
 
 minecraft.version("1.8.9")
 

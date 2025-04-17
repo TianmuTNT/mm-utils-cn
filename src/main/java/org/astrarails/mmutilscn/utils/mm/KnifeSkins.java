@@ -1,4 +1,4 @@
-package me.yanjobs.mmutils.utils.mm;
+package org.astrarails.mmutilscn.utils.mm;
 
 import net.minecraft.item.*;
 import net.minecraft.init.*;

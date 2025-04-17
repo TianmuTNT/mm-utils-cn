@@ -1,5 +1,5 @@
 {
   "entrypoints": [
-    "me.yanjobs.mmutils.MMUtils"
+    "org.astrarails.mmutilscn.MMUtilsCN"
   ]
 }
