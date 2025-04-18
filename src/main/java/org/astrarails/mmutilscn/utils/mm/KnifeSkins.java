@@ -74,7 +74,7 @@ public class KnifeSkins
         Items.record_ward,
         Items.bread,
         Items.golden_hoe,
-        //Items.sapling,
+        Item.getItemFromBlock((Block)Blocks.sapling),
         Items.golden_axe,
         Items.diamond_pickaxe,
         Items.golden_shovel,
