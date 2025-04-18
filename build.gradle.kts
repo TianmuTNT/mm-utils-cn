@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.astrarails.mm-utils-cn"
-version = "1.1"
+version = "1.2"
 
 minecraft.version("1.8.9")
 

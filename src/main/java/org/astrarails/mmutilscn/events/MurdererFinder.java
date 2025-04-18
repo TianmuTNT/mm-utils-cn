@@ -22,11 +22,14 @@ import org.astrarails.mmutilscn.utils.mm.KnifeSkins;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class MurdererFinder {
     public static ArrayList<String> murderers;
     public static ArrayList<String> detectives;
+    private static HashSet<String> murdererCache = new HashSet<>();
+    private static HashSet<String> detectiveCache = new HashSet<>();
     private World lastWorld;
     static boolean murderFound;
 
@@ -45,22 +48,13 @@ public class MurdererFinder {
                 GlStateManager.disableDepth();
                 renderHitBox((Entity) player, new Color(255, 255, 255), (float) (10 / Math.sqrt(Minecraft.getMinecraft().thePlayer.getDistanceToEntity(player))), event.getPartialTicks());
                 GlStateManager.enableDepth();
-
             }
 
             // Murderer
-            if (player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null && KnifeSkins.isItemKnifeSkin(player.getHeldItem().getItem())) {
-                boolean isInList = false;
-                for (int x = 0; x < MurdererFinder.murderers.size(); ++x) {
-                    if (MurdererFinder.murderers.get(x) == player.getName() && MurdererFinder.murderers.size() > 0) {
-                        isInList = true;
-                        break;
-                    }
-                }
-                if (!isInList && player.getName() != Minecraft.getMinecraft().thePlayer.getName()) {
-                    // 清空之前的murder id，再写入新的murder
-                    MurdererFinder.murderers.clear();
+            if (!murdererCache.contains(s) && player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null && KnifeSkins.isItemKnifeSkin(player.getHeldItem().getItem())) {
+                if (!player.getName().equals(Minecraft.getMinecraft().thePlayer.getName())) {
                     MurdererFinder.murderers.add(player.getName());
+                    murdererCache.add(player.getName());
                     Message.sendMessage(player.getName(), Message.LEVEL.Murderer);
                 }
             }
@@ -69,22 +63,15 @@ public class MurdererFinder {
                 if (murderer != null) {
                     GlStateManager.disableDepth();
                     renderHitBox((Entity) murderer, new Color(255, 55, 55), (float) (10 / Math.sqrt(Minecraft.getMinecraft().thePlayer.getDistanceToEntity(murderer))), event.getPartialTicks());
-
                     GlStateManager.enableDepth();
                 }
             }
 
             // Detectives
-            if (player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null && player.getHeldItem().getItem() == Items.bow) {
-                boolean isInList = false;
-                for (int x = 0; x < MurdererFinder.detectives.size(); ++x) {
-                    if (MurdererFinder.detectives.get(x) == player.getName() && MurdererFinder.detectives.size() > 0) {
-                        isInList = true;
-                        break;
-                    }
-                }
-                if (!isInList && player.getName() != Minecraft.getMinecraft().thePlayer.getName()) {
+            if (!detectiveCache.contains(s) && player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null && player.getHeldItem().getItem() == Items.bow) {
+                if (!player.getName().equals(Minecraft.getMinecraft().thePlayer.getName())) {
                     MurdererFinder.detectives.add(player.getName());
+                    detectiveCache.add(player.getName());
                     Message.sendMessage(player.getName(), Message.LEVEL.Detective);
                 }
             }
@@ -115,6 +102,8 @@ public class MurdererFinder {
         if (world != null && world != this.lastWorld) {
             MurdererFinder.murderers.clear();
             MurdererFinder.detectives.clear();
+            murdererCache.clear();
+            detectiveCache.clear();
             MMUtilsCN.isInMMClassic = false;
             murderFound = false;
         }
