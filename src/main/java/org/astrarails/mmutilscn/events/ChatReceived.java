@@ -8,9 +8,9 @@ public class ChatReceived {
 
     @SubscribeEvent
     public void onChatMessage(ChatReceivedEvent event) {
-        if (event.getMessage().getUnformattedText().equals("严禁与杀手联手！")) {
+        if (event.getMessage().getUnformattedText().equals("严禁与杀手联手！") || event.getMessage().getUnformattedText().equals("Teaming with the Murderer is not allowed!")) {
             MMUtilsCN.isInMMClassic = true;
-        } if (event.getMessage().getUnformattedText().equals("严禁与侦探/平民联手！")) {
+        } if (event.getMessage().getUnformattedText().equals("严禁与侦探/平民联手！") || event.getMessage().getUnformattedText().equals("Teaming with the Detective/Innocents is not allowed!")) {
             MMUtilsCN.isInMMClassic = true;
         }
     }
