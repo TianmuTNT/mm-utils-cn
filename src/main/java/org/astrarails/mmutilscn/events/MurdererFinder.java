@@ -69,10 +69,13 @@ public class MurdererFinder {
 
             // Detectives
             if (!detectiveCache.contains(s) && player != null && player.getHeldItem() != null && player.getHeldItem().getItem() != null && player.getHeldItem().getItem() == Items.bow) {
-                if (!player.getName().equals(Minecraft.getMinecraft().thePlayer.getName())) {
-                    MurdererFinder.detectives.add(player.getName());
-                    detectiveCache.add(player.getName());
-                    Message.sendMessage(player.getName(), Message.LEVEL.Detective);
+                // 如果该玩家已经是杀手，则不赋予侦探身份
+                if (!MurdererFinder.murderers.contains(player.getName())) {
+                    if (!player.getName().equals(Minecraft.getMinecraft().thePlayer.getName())) {
+                        MurdererFinder.detectives.add(player.getName());
+                        detectiveCache.add(player.getName());
+                        Message.sendMessage(player.getName(), Message.LEVEL.Detective);
+                    }
                 }
             }
             for (int y = 0; y < MurdererFinder.detectives.size(); ++y) {
